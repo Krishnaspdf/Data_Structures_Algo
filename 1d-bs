@@ -1,0 +1,60 @@
+#include <stdio.h>
+
+// Recursive function to perform binary search
+int binarySearch(int arr[], int low, int high, int target)
+{
+    // Base condition:
+    // If low becomes greater than high,
+    // the target is not present in the array
+    if (low > high)
+    {
+        return -1;
+    }
+
+    // Find the middle element
+    int mid = low + (high - low) / 2;
+
+    // If target is found at middle
+    if (arr[mid] == target)
+    {
+        return mid;
+    }
+
+    // If target is smaller than middle element,
+    // search in the left half
+    if (target < arr[mid])
+    {
+        return binarySearch(arr, low, mid - 1, target);
+    }
+
+    // If target is greater than middle element,
+    // search in the right half
+    return binarySearch(arr, mid + 1, high, target);
+}
+
+int main()
+{
+    // Sorted input array
+    int arr[] = {1, 3, 5, 7, 9, 11, 13};
+
+    // Calculate size of the array
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    // Target element
+    int target = 9;
+
+    // Perform recursive binary search
+    int result = binarySearch(arr, 0, n - 1, target);
+
+    // Display the result
+    if (result != -1)
+    {
+        printf("Element found at index: %d\n", result);
+    }
+    else
+    {
+        printf("Element not found\n");
+    }
+
+    return 0;
+}
